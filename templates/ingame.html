@@ -1,6 +1,10 @@
 {% extends 'first.html' %}
 {% block title %}Game{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/mainstyle.css') }}">
+{% endblock %}
+
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -30,31 +34,35 @@
     {% endwith %}
 
         <div class="content">
-            <h1 style="text-align: center">Task Master</h1>
+            <h1 style="text-align: center">Host: {{email}}</h1>
             {% if tasks|length < 1 %}
-            <h4 style="text-align: center">There are no tasks. Create one below!</h4>
+            <h4 style="text-align: center">There are no players. Add some below!</h4>
             {% else %}
-            <table>
-                <tr>
-                    <th>Task</th>
-                    <th>Added</th>
-                    <th>Actions</th>
-                </tr>
-                {% for task in tasks %}
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ task.content }}</td>
-                        <td>{{ task.date_created.date() }}</td>
-                        <td>
-                            <a href="/delete/{{task.id}}">Delete</a>
-                            <br>
-                            <a href="/update/{{task.id}}">Update</a>
-                        </td>
+                        <th scope="col">Task</th>
+                        <th scope="col">Added</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                {% endfor %}
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.content }}</td>
+                            <td>{{ task.date_created.date() }}</td>
+                            <td>
+                                <a href="/delete/{{task.id}}">Eliminate</a>
+                                <br>
+                                <a href="/update/{{task.id}}">Update</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
             {% endif %}
             
-        <form actions="/" method="POST">
+        <form actions="/" method="POST" style="text-align:center">
             <input type="text" name="content" id=content>
             <input type="submit" calue="Add Task">
         </form>
