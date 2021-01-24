@@ -1,0 +1,62 @@
+{% extends 'first.html' %}
+{% block title %}Game{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:5000/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:5000/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+        <div class="content">
+            <h1 style="text-align: center">Task Master</h1>
+            {% if tasks|length < 1 %}
+            <h4 style="text-align: center">There are no tasks. Create one below!</h4>
+            {% else %}
+            <table>
+                <tr>
+                    <th>Task</th>
+                    <th>Added</th>
+                    <th>Actions</th>
+                </tr>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.content }}</td>
+                        <td>{{ task.date_created.date() }}</td>
+                        <td>
+                            <a href="/delete/{{task.id}}">Delete</a>
+                            <br>
+                            <a href="/update/{{task.id}}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+            
+        <form actions="/" method="POST">
+            <input type="text" name="content" id=content>
+            <input type="submit" calue="Add Task">
+        </form>
+        </div>
+{% endblock %}
