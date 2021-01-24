@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-  {% if title %}
-    <title>Habit Royale {{title}}</title>
-  {% else %}
-    <title>Habit Royale </title>
-  {% endif %}
-</head>
-
-<body>
-  <h1>Welcome User1 :)</h1>
-  {% for room in user1_rooms %}
-    <h1> Room : {{room.name}} :) </h1>
-  {% endfor %}
-</body>
-
-
-</html>
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome User1 :)</h1>
+{% for room in user1_rooms %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ room.name }}</a>
+</article>
+{% endfor %}
+{% endblock content %}

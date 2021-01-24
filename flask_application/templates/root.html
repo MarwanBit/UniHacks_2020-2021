@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  {% if title %}
-    <title>Habit Royale {{title}}</title>
-  {% else %}
-    <title>Habit Royale </title>
-  {% endif %}
-</head>
-
-<body>
-
-<h1>Hello World :)</h1>
-
-</body>
-
-
-</html>
+{% extends "layout.html" %}
+{% block content %}
+  <h1>Hello World :)</h1>
+{% endblock content %}
