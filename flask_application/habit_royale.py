@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "d7c8a40871cd9e7f348c0bfaa821dbdc"
 
 user1_rooms = [
     {
